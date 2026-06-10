@@ -6,7 +6,6 @@ const bcrypt = require('bcryptjs');
 
 
 
-
 async function createMusic(req, res) {
 
     const { title } = req.body;
@@ -17,7 +16,7 @@ async function createMusic(req, res) {
     const music = await musicModel.create({
         uri: result.url,
         title,
-        artist: decoded.id,
+        artist: req.user.id,
     });
 
     res.status(200).json({
@@ -34,7 +33,7 @@ async function createAlbum(req, res) {
 
     const album = await albumModel.create({
         title,
-        artist: decoded.id,
+        artist: req.user.id,
         musics: musics,
 
     });
@@ -51,4 +50,37 @@ async function createAlbum(req, res) {
 
 }
 
-module.exports = { createMusic, createAlbum }
+
+async function getAllMusics(req,res) {
+    const musics = await musicModel.find().populate("artist", "username email");
+
+    res.status(200).json({
+        message:"Here are all the musics",
+        musics:musics
+    })
+    
+}
+async function getAllAlbums(req,res) {
+    const albums = await albumModel.find().select("title artist").populate("artist", "username email");
+    //we only get albums with this function and no music will be shown in that album for to show music we need to create another route
+    res.status(200).json({
+        message:"Here are the albums",
+        albums:albums
+    })
+    
+}
+
+
+
+async function getAllAlbumById(req,res) {
+    const albumId = req.params.albumId;
+    const album = await albumModel.findById(albumId).populate("artist","username email").populate("musics");
+
+    res.status(200).json({
+        message:"Here are the songs from This Album",
+        album:album
+    })
+    
+}
+
+module.exports = { createMusic, createAlbum, getAllMusics, getAllAlbums, getAllAlbumById }
