@@ -35,7 +35,7 @@
     font-size: 16px;
   }
 
-  --background: oklch(1 0 0);
+  --background: #4b0f0f;
 
   --foreground: oklch(0.145 0 0);
 
@@ -118,6 +118,7 @@
 
 body {
   margin: 0;
+  background-color: #4b0f0f;
 }
 
 #root {

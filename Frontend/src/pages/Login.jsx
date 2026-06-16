@@ -11,20 +11,12 @@ import {
 const Login = () => {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="hidden bg-muted lg:flex lg:flex-col lg:items-center lg:justify-center">
-        <div className="text-center">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground text-3xl font-bold">
-            S
-          </div>
-
-          <h1 className="text-4xl font-bold tracking-tight">
-            SurTaal
-          </h1>
-
-          <p className="mt-3 max-w-sm text-muted-foreground">
-            Learn, practice, and manage your musical journey.
-          </p>
-        </div>
+      <div className="hidden lg:block">
+        <img
+          src="/banner.png"
+          alt="SurTaal"
+          className="h-screen w-full object-cover"
+        />
       </div>
 
       <div className="flex items-center justify-center px-6 py-12">
